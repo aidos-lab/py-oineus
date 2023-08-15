@@ -27,7 +27,7 @@ class CMakeExtensionBuilder(build_ext):
             self.build_extension(ext)
 
     def install_dependencies(self):
-        subprocess.check_call(["git", "submodule", "update", "--init", "--recursive"])
+        subprocess.run(["git", "submodule", "update", "--init", "--recursive"])
 
     def build_extension(self, ext):
         # Specifies the path under which we can expect the output
