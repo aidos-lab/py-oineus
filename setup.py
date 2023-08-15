@@ -1,3 +1,4 @@
+from setuptools import find_packages
 from setuptools import setup
 from setuptools import Extension
 from setuptools.command.build_ext import build_ext
@@ -32,12 +33,7 @@ class CMakeExtensionBuilder(build_ext):
         # Specifies the path under which we can expect the output
         # library. This depends on the package and may change.
         ext_dir = os.path.abspath(
-            os.path.join(
-                os.path.dirname(self.get_ext_fullpath(ext.name)),
-                "oineus",
-                "bindings",
-                "python",
-            )
+            os.path.dirname(self.get_ext_fullpath(ext.name)),
         )
 
         # Additional arguments for `CMake`. These ensure that we are
@@ -57,14 +53,13 @@ class CMakeExtensionBuilder(build_ext):
             os.makedirs(self.build_temp)
 
         subprocess.check_call(["cmake", ext.root_dir] + cmake_args, cwd=self.build_temp)
-
         subprocess.check_call(
             ["cmake", "--build", "."] + build_args, cwd=self.build_temp
         )
 
 
 setup(
-    name="py-oineus",
+    name="oineus",
     version="",
     description="",
     long_description="",
@@ -77,6 +72,7 @@ setup(
     install_requires=[
         "Cython",
         "numpy",
+        "scipy",
     ],
     ext_modules=[CMakeExtension("oineus", "oineus")],
     cmdclass={"build_ext": CMakeExtensionBuilder},
@@ -89,4 +85,8 @@ setup(
         "License :: OSI Approved :: MIT License",
     ],
     keywords="",
+    # Ensures that we can distribute this package correctly; we do not
+    # want to get into any problems since we distribute shared libs as
+    # a part of this package.
+    zip_safe=False,
 )
