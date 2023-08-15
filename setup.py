@@ -19,7 +19,7 @@ class CMakeExtensionBuilder(build_ext):
         try:
             subprocess.check_output(["cmake", "--version"])
         except OSError:
-            raise "heck"
+            raise RuntimeError("Missing `cmake` executable")
 
         self.install_dependencies()
 
