@@ -63,8 +63,7 @@ class CMakeExtensionBuilder(build_ext):
 
 setup(
     name="oineus",
-    version="",
-    description="",
+    description="Python bindings for the `oineus` library for calculating persistent homology",
     long_description="",
     long_description_content_type="text/markdown",
     author="",
@@ -88,6 +87,11 @@ setup(
         "License :: OSI Approved :: MIT License",
     ],
     keywords="",
+    # Provide versioning based on git information.
+    setuptools_git_versioning={
+        "enabled": True,
+    },
+    setup_requires=["setuptools-git-versioning<2"],
     # Ensures that we can distribute this package correctly; we do not
     # want to get into any problems since we distribute shared libs as
     # a part of this package.
