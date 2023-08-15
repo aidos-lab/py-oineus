@@ -70,13 +70,12 @@ setup(
     author_email="",
     url="",
     license="MIT",
-    packages=["oineus"],
     install_requires=[
         "Cython",
         "numpy",
         "scipy",
     ],
-    ext_modules=[CMakeExtension("oineus", "oineus")],
+    ext_modules=[CMakeExtension("oineus", "oineus-src")],
     cmdclass={"build_ext": CMakeExtensionBuilder},
     python_requires=">=3.8",
     classifiers=[
