@@ -1,10 +1,11 @@
-from setuptools import setup
-from setuptools import Extension
-from setuptools.command.build_ext import build_ext
-
 import os
 import subprocess
 import sys
+
+from setuptools import setup
+from setuptools import Extension
+
+from setuptools.command.build_ext import build_ext
 
 
 class CMakeExtension(Extension):
@@ -42,6 +43,9 @@ class CMakeExtensionBuilder(build_ext):
             f"-DCMAKE_LIBRARY_OUTPUT_DIRECTORY={ext_dir}",
             f"-DPYTHON_EXECUTABLE={sys.executable}",
         ]
+
+        if (compiler := os.getenv("CMAKE_CXX_COMPILER")) is not None:
+            cmake_args.append(f"-DCMAKE_CXX_COMPILER={compiler}")
 
         # Additional arguments for building the module.
         build_args = ["-j4"]
