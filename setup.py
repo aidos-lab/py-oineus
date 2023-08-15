@@ -1,4 +1,3 @@
-from setuptools import find_packages
 from setuptools import setup
 from setuptools import Extension
 from setuptools.command.build_ext import build_ext
