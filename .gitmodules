@@ -1,3 +1,4 @@
 [submodule "oineus"]
 	path = oineus-src
 	url = https://github.com/aidos-lab/oineus.git
+	branch = https
